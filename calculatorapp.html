@@ -1,0 +1,191 @@
+<html>
+    <head>
+        <title>
+            Calculator app
+        </title>
+        <style>
+            div
+            {
+                display:grid;
+                grid-template-columns:1fr 1fr 1fr 1fr;
+                height:400px;
+                width:400px; 
+                margin-bottom:5px;
+            }
+            .box
+            {
+                border:1px solid black;
+                border-spacing:4px;
+                border-radius: 5px;
+                color: yellowgreen;
+            }
+            #calc{
+                padding:50px;
+                margin-top:100px;
+                border:2px solid rgb(127, 134, 30);
+                background-color:rgb(127,134,30);
+                border-radius:25px;
+            }
+            #display
+            {
+                height:50px;
+                width:100px;
+                background-color:beige;
+                border-style: hidden;
+            }
+        </style>
+    </head>
+    <body>
+         <center> 
+        <div id="calc"> 
+            <button class="box"  onclick="clearD()">AC</button>
+            <button class="box" onclick="removeL()">DEL</button>
+            <button class="box" onclick="enter('%')">%</button>
+            <button class="box" onclick="enter('/')">/</button>
+            <button class="box" onclick="enter('7')">7</button>
+            <button class="box" onclick="enter('8')">8</button>
+            <button class="box" onclick="enter('9')">9</button>
+            <button class="box" onclick="enter('*')">*</button>
+            <button class="box" onclick="enter('4')">4</button>
+            <button class="box" onclick="enter('5')">5</button>
+            <button class="box" onclick="enter('6')">6</button>
+            <button class="box" onclick="enter('-')">-</button>
+            <button class="box" onclick="enter('1')">1</button>
+            <button class="box" onclick="enter('2')">2</button>
+            <button class="box" onclick="enter('3')">3</button>
+            <button class="box" onclick="enter('+')">+</button>
+            <button class="box" onclick="enter('.')">.</button>
+            <button class="box" onclick="enter('0')">0</button>
+            <button class="box" onclick="show()">=</button>
+        </div>
+        </center>
+        <center>
+        <div>
+            <input type="text" id="display" readonly>
+        </div>
+        </center>
+        <script>
+            var display=document.getElementById("display");
+            function show()
+            {   
+                //calculate();
+                calc2();
+            }
+            function clearD()
+            { 
+                document.getElementById("display").value="";
+            }
+            function removeL()
+            {
+                display.value=display.value.slice(0,-1);
+            }
+            function enter(val)
+            {
+                display.value+=val;
+            }
+            // function calculate()
+            // {
+            //     // var a=document.getElementById("").value;
+            //     // var b=document.getElementById("").value;
+            //     // var c=document.getElementById("").value;
+            //     // var d="";
+            //     //var text=document.getElementById("text");
+            //     var operator;
+            //     var input=display.value;
+            //     if(input.includes('+'))
+            //     {
+            //     operator='+';
+            //     }
+            //     else if(input.includes('-'))
+            //     {
+            //     operator='-';
+            //     }
+            //     else if(input.includes('*'))
+            //     {
+            //     operator='*';
+            //     }
+            //      else if(input.includes('/'))
+            //     {
+            //     operator='/';
+            //     }
+            //     else if(input.includes('%'))
+            //     {
+            //     operator='%';
+            //     }
+            //     else
+            //     {
+                    
+            //         display.value="enter correct operation";
+            //         return;
+            //     } 
+            //     let [num1,num2]=input.split(operator);
+            //     num1=Number(num1);
+            //     num2=Number(num2);
+            //     var result;
+            //     switch(operator)
+            //     {
+            //         case '+':
+            //             result=num1+num2;
+            //             break;
+            //         case '-':
+            //             result=num1-num2;
+            //             break;
+            //         case '*':
+            //             result=num1*num2;
+            //             break;
+            //         case '/':
+            //             result=num1/num2;
+            //             break;
+            //         case '%':
+            //             result=num1%num2;
+            //             break;
+            //     } 
+            //     display.value=result;   
+            // }
+            function calc2()
+            {
+                var input=display.value;
+                var operator;
+                 
+                let operators=input.match(/[\+\-\*\%\/]/g);
+                 let numbers=input.split(/[\+\-\*\/\%]/).map(Number);
+                 if(!operators)
+                    return;
+                for(let i=0;i<operators.length;i++)
+            {
+                let result;
+                if(operators[i]=='*'||operators[i]=='/'||operators[i]=='%')
+            {
+                if(operators[i]=='*')
+               {
+                   result=numbers[i]*numbers[i+1];
+               }
+            else if(operators[i]=='/')
+            {
+                result=numbers[i]/numbers[i+1];
+            }
+            else if(opearators[i]=='%')
+            {
+                result=numbers[i]%numbers[i+1];
+            }
+            numbers.splice(i,2,result);
+            operators.splice(i,1);
+            i--;
+        }
+            }
+            let result=numbers[0];
+            for(let i=0;i<operators.length;i++)
+            {
+                if(operators[i]=='+')
+                {
+                result+=numbers[i+1];
+                }
+            else{
+                result-=numbers[i+1];
+            }
+            }
+                display.value=result;
+            }
+        </script>
+    </body>
+</html>
