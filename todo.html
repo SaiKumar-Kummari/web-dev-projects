@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <title>
+            Todo App
+        </title>
+        <style>
+            body
+            {   
+                top:100px;
+            }
+            button
+            {
+                border:1px black solid;
+                border-radius:5px;
+                border-color:blueviolet;
+                color:violet;
+            }
+        </style>
+    </head>
+    <body>
+        <center>
+        <h2>ToDO App</h2>
+        <input type="text" name="text" placeholder="enter task" id="text"><br><br><br>
+        <button onclick="openData()">Add Work</button><br>    
+        <ul id="list"></ul>
+        </center>
+    </body>
+    <script>
+        function openData()
+        {
+            let input=document.getElementById("text").value;
+            //let ul=document.getElementByTagName("ul");
+            if(input=="")
+            {
+                alert("enter the task");
+                return;
+            }  
+            let li=document.createElement("li");
+            li.innerText=input;
+            document.getElementById("list").appendChild(li); 
+        }
+    </script>
+</html>
